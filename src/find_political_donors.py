@@ -92,7 +92,7 @@ if __name__ == '__main__':
 			zipcode = split_data[10]
 			date = split_data[13]
 			transaction_amount = split_data[14]
-			if valid_zipcode(int(zipcode)):
+			if valid_zipcode(zipcode):
 				zipcode = zipcode[:5]
 				if len(zipcode) == 5:
 					ID = customer_ID + " " + zipcode
