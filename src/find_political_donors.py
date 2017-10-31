@@ -1,3 +1,8 @@
+##### Set the path #####
+input_path = './input/itcont.txt' # You can change this line to your own input file path
+output_zip_path = "./output/medianvals_by_zip.txt" # You can change this line to your own output file path
+output_date_path = "./output/medianvals_by_date.txt" # You can change this line to your own output file path
+
 ##### Functions #####
 
 ### Function 1: The function to calculate the median value
@@ -83,7 +88,7 @@ if __name__ == '__main__':
 
 	# Read the raw data into the python line by line, save the memory
 	print("Calculating the value for the zipcode and date... ", end = "")
-	with open('./input/itcont.txt') as f:
+	with open(input_path) as f:
 		for line in f:
 			split_data = line.split('|')
 			if split_data[15] != "" or split_data[0] == "" or split_data[14] == "":
@@ -113,16 +118,16 @@ if __name__ == '__main__':
 	result_date = [result_date[i] for i in ranked_ID] # Change the order of the result
 	result_date = list(map(lambda x: "|".join(x), result_date))
 	print("Done!")
-
+	
 	# Write the data into the output folder
 	print("Writing the zipcode results... ", end = "")
-	with open("./output/medianvals_by_zip.txt", "w") as output_zip:
+	with open(output_zip_path, "w") as output_zip:
 		for i in result_zipcode:
 			output_zip.write(i + "\n")
 		output_zip.close()
 	print("Done!")
 	print("Writing the date results... ", end = "")
-	with open("./output/medianvals_by_date.txt", "w") as output_date:
+	with open(output_date_path, "w") as output_date:
 		for i in result_date:
 			output_date.write(i + "\n")
 		output_date.close()
