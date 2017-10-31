@@ -1,0 +1,1 @@
+I didn't separate the code into several files, because I think in one code file can make the code more concise and esaily to understand. In the code file, there are comments to help understand the structure. 
