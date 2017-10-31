@@ -47,6 +47,8 @@ def medianvals_date(ID):
 
 ### Function 4: Check whether the date format is valid
 def valid_date(date_input):
+	if date_input.isdigit() == False:
+		return False
 	if len(date_input) != 8:
 		return False
 	if int(date_input[0:2]) <= 0 or int(date_input[0:2]) >= 13:
@@ -56,7 +58,14 @@ def valid_date(date_input):
 	else:
 		return True 
 
-### Function 5: Rank the data for the re-order in the date file
+### Function 6: Check whether the zipcode format is valid
+def valid_zipcode(zip_input): # check for zipcode
+    if len(zip_input) > 4 and len(zip_input) < 10:
+        return True
+    else:
+        return False
+
+### Function 7: Rank the data for the re-order in the date file
 def rank(vector):
     return sorted(range(len(vector)), key=vector.__getitem__)
 
@@ -80,12 +89,14 @@ if __name__ == '__main__':
 			if split_data[15] != "" or split_data[0] == "" or split_data[14] == "":
 				continue
 			customer_ID = split_data[0]
-			zipcode = split_data[10][:5]
+			zipcode = split_data[10]
 			date = split_data[13]
 			transaction_amount = split_data[14]
-			if len(zipcode) == 5:
-				ID = customer_ID + " " + zipcode
-				result_zipcode.append(medianvals_zipcode(ID))
+			if valid_zipcode(int(zipcode)):
+				zipcode = zipcode[:5]
+				if len(zipcode) == 5:
+					ID = customer_ID + " " + zipcode
+					result_zipcode.append(medianvals_zipcode(ID))
 			if valid_date(date): 
 				ID = customer_ID + " " + date
 				medianvals_date(ID)
@@ -117,8 +128,3 @@ if __name__ == '__main__':
 		output_date.close()
 	print("Done!")
 	print("Finish!")
-
-
-
-
-
